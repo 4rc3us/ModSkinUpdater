@@ -1,22 +1,16 @@
 import os
-import wget
 
-if(os.system('mkdir %USERPROFILE%\ModSkin') == 0):
-    url = 'https://www.python.org/static/img/python-logo@2x.png'
+pathContenedor = os.popen("echo %USERPROFILE%\ModSkin").read()
+fileName = os.listdir(pathContenedor[:-1])
+pathDestino = os.popen("echo %USERPROFILE%\ModSkin").read()
+pathWfile = pathContenedor[0:-1] + "\\" + fileName[0]
 
-    stream = os.popen('echo %USERPROFILE%\ModSkin')
-    output = stream.read()
+ejecutable = []
 
-    print("El directorio {} no existe. Creando...".format(output[0:-1]))
+for fichero in fileName:
+    if os.path.isfile(os.path.join(pathContenedor[:-1], fichero)) and fichero.endswith(
+        ".exe"
+    ):
+        ejecutable.append(fichero)
 
-    wget.download(url, output[0:-1])
-    
-else:
-    stream = os.popen('echo %USERPROFILE%\ModSkin')
-    output = stream.read()
-    print("El directorio {} ya existe. Eliminando...".format(output[0:-1]))
-    os.system('rmdir %USERPROFILE%\ModSkin')
-
-    url = 'https://www.python.org/static/img/python-logo@2x.png'
-    
-    wget.download(url, output[0:-1])
+print(ejecutable[0])
