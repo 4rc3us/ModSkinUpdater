@@ -3,6 +3,7 @@ import requests
 import os
 import wget
 import zipfile
+import subprocess, sys
 
 
 def unZip():
@@ -32,11 +33,17 @@ def getUrl():
     # Finde la funcion
 
 
+def createShortcut():
+    p = subprocess.Popen(["powershell.exe", ".\\CreateShortCut.ps1"], stdout=sys.stdout)
+    p.communicate()
+
+
 if os.system("mkdir %USERPROFILE%\ModSkin") == 0:
     output = os.popen("echo %USERPROFILE%\ModSkin").read()
 
     wget.download(getUrl(), output[0:-1])
     unZip()
+    createShortcut()
 
 else:
     os.system("rmdir %USERPROFILE%\ModSkin /S /Q")
@@ -49,3 +56,4 @@ else:
         print("Descargando archivo")
         wget.download(getUrl(), output[0:-1])
         unZip()
+        createShortcut()

@@ -1,4 +1,17 @@
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\ColorPix.lnk")
-$Shortcut.TargetPath = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
+$sourceFileLocation = "$Home\modskin\"
+
+$sourceFileLocation += Get-ChildItem $sourceFileLocation -Filter *.exe -Name
+
+Write-Host $sourceFileLocation
+
+$ShortcutLocation = "$Home\Documents\+\ModSkin.lnk"
+
+$WScriptShell = New-Object -ComObject WScript.Shell
+
+$Shortcut = $WScriptShell.CreateShortcut($ShortcutLocation)
+ 
+$Shortcut.TargetPath = $SourceFileLocation
+ 
 $Shortcut.Save()
+
+Write-Host 'Shortcut created'
