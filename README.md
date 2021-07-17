@@ -12,6 +12,6 @@ comandos:
 -py -m ensurepip --default-pip  
 -py -m pip install --upgrade pip setuptools wheel  
 -pip install bs4  
--pip intsall requests  
--pip intsall lxml  
--pip intsall wget
+-pip install requests  
+-pip install lxml  
+-pip install wget
