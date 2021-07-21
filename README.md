@@ -13,7 +13,7 @@ python3
 3. *py -m pip --version*  
 4. *py -m ensurepip --default-pip*  
 5. *py -m pip install --upgrade pip setuptools wheel*  
-6. pip install bs4*  
-7. pip install requests*  
-8. pip install lxml*  
-9. pip install wget*
+6. *pip install bs4*  
+7. *pip install requests*  
+8. *pip install lxml*  
+9. *pip install wget*
