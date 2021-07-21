@@ -24,11 +24,9 @@ def getUrl():
     # Funcion para obtener la url del zip
     r = requests.get("http://leagueskin.net/p/download-mod-skin-2020-chn")
     soup = BeautifulSoup(r.content, "lxml")
-    url = ""
 
     for link in soup.find_all("a"):
         if ".zip" in link.get("href"):
-            print(url)
             return link.get("href")
     # Finde la funcion
 
@@ -40,7 +38,7 @@ def createShortcut():
 
 if os.system("mkdir %USERPROFILE%\ModSkin") == 0:
     output = os.popen("echo %USERPROFILE%\ModSkin").read()
-
+    print("\nDescargando archivo", getUrl() + "\n")
     wget.download(getUrl(), output[0:-1])
     unZip()
     createShortcut()
@@ -49,11 +47,11 @@ else:
     os.system("rmdir %USERPROFILE%\ModSkin /S /Q")
     output = os.popen("echo %USERPROFILE%\ModSkin").read()
 
-    print("Eliminando...")
+    print("\nEliminando...")
 
     if os.system("mkdir %USERPROFILE%\ModSkin") == 0:
 
-        print("Descargando archivo")
+        print("\nDescargando archivo", getUrl(), "\n")
         wget.download(getUrl(), output[0:-1])
         unZip()
         createShortcut()
