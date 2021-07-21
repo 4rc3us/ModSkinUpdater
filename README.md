@@ -1,6 +1,6 @@
 # Mod Skin Updater
 
-dependencias:  
+**dependencias:  **
 bs4  
 requests  
 lxml  
