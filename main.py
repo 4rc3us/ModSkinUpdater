@@ -8,9 +8,9 @@ import subprocess, sys
 
 def unZip():
     # Funcion para descomprimir el archivo descargado
-    pathContenedor = os.popen("echo %USERPROFILE%\ModSkin").read()
+    pathContenedor = os.popen('echo "%USERPROFILE%\ModSkin"').read()
     fileName = os.listdir(pathContenedor[:-1])
-    pathDestino = os.popen("echo %USERPROFILE%\ModSkin").read()
+    pathDestino = os.popen('echo "%USERPROFILE%\ModSkin"').read()
     pathWfile = pathContenedor[0:-1] + "\\" + fileName[0]
 
     with zipfile.ZipFile(pathWfile, "r") as zip_ref:
@@ -22,7 +22,7 @@ def unZip():
 
 def getUrl():
     # Funcion para obtener la url del zip
-    r = requests.get("http://leagueskin.net/p/download-mod-skin-2020-chn")
+    r = requests.get("https://lolskin.pro/")
     soup = BeautifulSoup(r.content, "lxml")
 
     for link in soup.find_all("a"):
@@ -36,22 +36,29 @@ def createShortcut():
     p.communicate()
 
 
-if os.system("mkdir %USERPROFILE%\ModSkin") == 0:
-    output = os.popen("echo %USERPROFILE%\ModSkin").read()
-    print("\nDescargando archivo", getUrl() + "\n")
-    wget.download(getUrl(), output[0:-1])
+if os.system('mkdir "%USERPROFILE%\ModSkin"') == 0:
+    p = subprocess.Popen(
+        ["powershell.exe", ".\\GetHomeFolder.ps1"], stdout=subprocess.PIPE
+    )
+    output = p.communicate()[0].decode("utf-8")[0:-2]
+    url = getUrl()
+    print("\nDescargando archivo", url + "\n")
+    wget.download(url, output)
     unZip()
     createShortcut()
 
 else:
-    os.system("rmdir %USERPROFILE%\ModSkin /S /Q")
-    output = os.popen("echo %USERPROFILE%\ModSkin").read()
+    os.system('rmdir "%USERPROFILE%\ModSkin" /S /Q')
+    p = subprocess.Popen(
+        ["powershell.exe", ".\\GetHomeFolder.ps1"], stdout=subprocess.PIPE
+    )
+    output = p.communicate()[0].decode("utf-8")[0:-2]
 
     print("\nEliminando...")
 
-    if os.system("mkdir %USERPROFILE%\ModSkin") == 0:
-
-        print("\nDescargando archivo", getUrl(), "\n")
-        wget.download(getUrl(), output[0:-1])
+    if os.system('mkdir "%USERPROFILE%\ModSkin"') == 0:
+        url = getUrl()
+        print("\nDescargando archivo", url, "\n")
+        wget.download(url, output)
         unZip()
         createShortcut()
