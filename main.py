@@ -8,13 +8,18 @@ import subprocess, sys
 
 def unZip():
     # Funcion para descomprimir el archivo descargado
-    pathContenedor = os.popen('echo "%USERPROFILE%\ModSkin"').read()
-    fileName = os.listdir(pathContenedor[:-1])
-    pathDestino = os.popen('echo "%USERPROFILE%\ModSkin"').read()
-    pathWfile = pathContenedor[0:-1] + "\\" + fileName[0]
+
+    p = subprocess.Popen(
+        ["powershell.exe", ".\\GetHomeFolder.ps1"], stdout=subprocess.PIPE
+    )
+    
+
+    pathContenedor = p.communicate()[0].decode("utf-8")[0:-2]
+    fileName = os.listdir(pathContenedor)
+    pathWfile = pathContenedor + "\\" + fileName[0]
 
     with zipfile.ZipFile(pathWfile, "r") as zip_ref:
-        zip_ref.extractall(pathDestino[0:-1])
+        zip_ref.extractall(pathContenedor)
 
     print("\n\nArchivo descomprimido")
     # Finde la funcion
@@ -22,7 +27,7 @@ def unZip():
 
 def getUrl():
     # Funcion para obtener la url del zip
-    r = requests.get("https://lolskin.pro/")
+    r = requests.get("http://leagueskin.net/p/download-mod-skin-2020-chn")
     soup = BeautifulSoup(r.content, "lxml")
 
     for link in soup.find_all("a"):
