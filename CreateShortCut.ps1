@@ -4,7 +4,7 @@ $sourceFileLocation += Get-ChildItem $sourceFileLocation -Filter *.exe -Name
 
 Write-Host $sourceFileLocation
 
-$ShortcutLocation = "$Home\Documents\+\ModSkin.lnk"
+$ShortcutLocation = "$Home\Documents\Shortcuts\ModSkin.lnk"
 
 $WScriptShell = New-Object -ComObject WScript.Shell
 
