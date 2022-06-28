@@ -1,12 +1,8 @@
 from bs4 import BeautifulSoup
-import requests
-import os
-import wget
-import zipfile
-import subprocess, sys
+import subprocess, sys, os, requests, wget, zipfile
 
 p = subprocess.Popen(
-    ["powershell.exe", ".\\Scripts\\GetHomeFolder.ps1"], stdout=subprocess.PIPE
+    ["powershell.exe", "Write-Output $HOME\ModSkin\;"], stdout=subprocess.PIPE
 )
 
 HOME = p.communicate()[0].decode("utf-8")[0:-2]
@@ -23,7 +19,6 @@ def unZip():
 
 
 def getUrl():
-    # Funcion para obtener la url del zip
     r = requests.get("http://leagueskin.net/p/download-mod-skin-2020-chn")
     soup = BeautifulSoup(r.content, "lxml")
 
@@ -37,7 +32,7 @@ def createShortcut():
 
 if os.system('mkdir "%USERPROFILE%\ModSkin"') == 0:
     url = getUrl()
-    print("\nDescargando archivo", url + "\n")
+    print("\nDownloading file", url + "\n")
     wget.download(url, HOME)
     unZip()
     createShortcut()
@@ -45,11 +40,11 @@ if os.system('mkdir "%USERPROFILE%\ModSkin"') == 0:
 else:
     os.system('rmdir "%USERPROFILE%\ModSkin" /S /Q')
 
-    print("\nEliminando...")
+    print("\nRemoving...")
 
     if os.system('mkdir "%USERPROFILE%\ModSkin"') == 0:
         url = getUrl()
-        print("\nDescargando archivo", url, "\n")
+        print("\nDownloading file", url, "\n")
         wget.download(url, HOME)
         unZip()
         createShortcut()
