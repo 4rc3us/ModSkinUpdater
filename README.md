@@ -1,4 +1,4 @@
-# Mod Skin Updater :warning:
+# Mod Skin Updater
 
 Just do a double click on UpdateModSkin.ps1 file and enjoy.
 
