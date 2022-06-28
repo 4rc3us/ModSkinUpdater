@@ -11,9 +11,9 @@ Set-ExecutionPolicy Unrestricted
 ```
 
 Improvement time compared with last version 😂
-![[Pasted image 20220628094445.png]]
+![Pasted image 20220628094445.png]("Pasted image 20220628094445.png")
 
-![[Pasted image 20220628094641.png]]
+![Pasted image 20220628094641.png]("Pasted image 20220628094641.png")
 
 ##### Dependencies
 - python3
