@@ -1,20 +1,23 @@
 # Mod Skin Updater
 
-**dependencias:**  
-- python3  
-- bs4  
-- requests  
-- lxml  
-- wget  
+Just do a double click on UpdateModSkin.ps1 file and enjoy.
 
+##### Command :warning:
+Could be windows will block powershell script execution, in that case write this command on Admin powershell prompt.
 
-**comandos:**  
-1. *Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))*  
-2. *choco install python*  
-3. *py -m pip --version*  
-4. *py -m ensurepip --default-pip*  
-5. *py -m pip install --upgrade pip setuptools wheel*  
-6. *pip install bs4*  
-7. *pip install requests*  
-8. *pip install lxml*  
-9. *pip install wget*
+``` powershell
+#ONLY IF WINDOWS BLOCK THE SCRIPT
+Set-ExecutionPolicy Unrestricted
+```
+
+Improvement time compared with last version 😂
+![[Pasted image 20220628094445.png]]
+
+![[Pasted image 20220628094641.png]]
+
+##### Dependencies
+- python3
+- bs4
+- requests
+- lxml
+- wget

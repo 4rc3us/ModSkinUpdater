@@ -7,12 +7,9 @@ import subprocess, sys
 
 
 def unZip():
-    # Funcion para descomprimir el archivo descargado
-
     p = subprocess.Popen(
         ["powershell.exe", ".\\GetHomeFolder.ps1"], stdout=subprocess.PIPE
     )
-    
 
     pathContenedor = p.communicate()[0].decode("utf-8")[0:-2]
     fileName = os.listdir(pathContenedor)
@@ -22,7 +19,6 @@ def unZip():
         zip_ref.extractall(pathContenedor)
 
     print("\n\nArchivo descomprimido")
-    # Finde la funcion
 
 
 def getUrl():
@@ -30,10 +26,7 @@ def getUrl():
     r = requests.get("http://leagueskin.net/p/download-mod-skin-2020-chn")
     soup = BeautifulSoup(r.content, "lxml")
 
-    for link in soup.find_all("a"):
-        if ".zip" in link.get("href"):
-            return link.get("href")
-    # Finde la funcion
+    return soup.find("a", {"id": "link_download3"}).get("href")
 
 
 def createShortcut():
@@ -54,9 +47,11 @@ if os.system('mkdir "%USERPROFILE%\ModSkin"') == 0:
 
 else:
     os.system('rmdir "%USERPROFILE%\ModSkin" /S /Q')
+
     p = subprocess.Popen(
         ["powershell.exe", ".\\GetHomeFolder.ps1"], stdout=subprocess.PIPE
     )
+
     output = p.communicate()[0].decode("utf-8")[0:-2]
 
     print("\nEliminando...")
