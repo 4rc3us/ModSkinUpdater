@@ -24,27 +24,18 @@ def getUrl():
 
     return soup.find("a", {"id": "link_download3"}).get("href")
 
-
 def createShortcut():
     p = subprocess.Popen(["powershell.exe", ".\\Scripts\\CreateShortCut.ps1"], stdout=sys.stdout)
     p.communicate()
 
+returnStatus = os.system('mkdir "%USERPROFILE%\ModSkin"') == 0
 
-if os.system('mkdir "%USERPROFILE%\ModSkin"') == 0:
-    url = getUrl()
-    print("\nDownloading file", url + "\n")
-    wget.download(url, HOME)
-    unZip()
-    createShortcut()
-
-else:
+if not returnStatus:
     os.system('rmdir "%USERPROFILE%\ModSkin" /S /Q')
+    os.system('mkdir "%USERPROFILE%\ModSkin"')
 
-    print("\nRemoving...")
-
-    if os.system('mkdir "%USERPROFILE%\ModSkin"') == 0:
-        url = getUrl()
-        print("\nDownloading file", url, "\n")
-        wget.download(url, HOME)
-        unZip()
-        createShortcut()
+url = getUrl()
+print("\nDownloading file", url + "\n")
+wget.download(url, HOME)
+unZip()
+createShortcut()
